@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notification Preferences</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+    padding: 40px;
+}
+
+.container {
+    width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.section {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channels span {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.active {
+    background: #4a90e2;
+    color: white;
+}
+
+.switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.switch::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+    transition: 0.2s;
+}
+
+.switch.on {
+    background: #4a90e2;
+}
+
+.switch.on::after {
+    left: 21px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Notification Preferences</h2>
+
+    <div class="section">
+        <div class="row">
+            <div>
+                <strong>Shipment Tracking</strong>
+                <p>Send updates about shipment status</p>
+                <div class="channels">
+                    <span class="active">SMS</span>
+                    <span class="active">Email</span>
+                    <span>Inbox</span>
+                    <span>Push</span>
+                </div>
+            </div>
+            <div class="switch on"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="row">
+            <div>
+                <strong>Return and Refunds</strong>
+                <p>Updates about return and refund status</p>
+                <div class="channels">
+                    <span class="active">SMS</span>
+                    <span>Email</span>
+                    <span>Inbox</span>
+                    <span>Push</span>
+                </div>
+            </div>
+            <div class="switch"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="row">
+            <div>
+                <strong>Weekly Transaction Summary</strong>
+                <p>Summary of deliveries and transactions</p>
+                <div class="channels">
+                    <span class="active">Email</span>
+                </div>
+            </div>
+            <div class="switch"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// toggle switch
+document.querySelectorAll(".switch").forEach(sw => {
+    sw.addEventListener("click", () => {
+        sw.classList.toggle("on");
+    });
+});
+
+// select channels
+document.querySelectorAll(".channels span").forEach(item => {
+    item.addEventListener("click", () => {
+        item.classList.toggle("active");
+    });
+});
+</script>
+
+</body>
+</html>

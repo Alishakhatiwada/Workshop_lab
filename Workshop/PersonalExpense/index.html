@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+
+    <!-- Simple CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        .container {
+            width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+            width: 120px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background: #eee;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Expense Tracker</h2>
+
+    <!-- Input -->
+    <input type="text" id="category" placeholder="Category">
+    <input type="number" id="amount" placeholder="Amount">
+    <button onclick="addExpense()">Add</button>
+
+    <!-- Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody id="expenseTable"></tbody>
+    </table>
+
+    <h3>Total: Rs <span id="total">0</span></h3>
+
+    <!-- Chart -->
+    <canvas id="chart"></canvas>
+</div>
+
+<script>
+let total = 0;
+
+function addExpense() {
+    let category = document.getElementById("category").value;
+    let amount = Number(document.getElementById("amount").value);
+
+    if(category === "" || amount === 0) return;
+
+    let table = document.getElementById("expenseTable");
+    let row = table.insertRow();
+
+    row.insertCell(0).innerText = category;
+    row.insertCell(1).innerText = amount;
+
+    total += amount;
+    document.getElementById("total").innerText = total;
+
+    document.getElementById("category").value = "";
+    document.getElementById("amount").value = "";
+}
+</script>
+
+</body>
+</html>

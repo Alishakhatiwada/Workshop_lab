@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing Feedback Tool</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.container {
+    background: white;
+    width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+}
+
+.progress {
+    height: 10px;
+    background: lightgray;
+    margin-top: 10px;
+}
+
+.bar {
+    height: 100%;
+    width: 0%;
+    background: blue;
+}
+.warning {
+    color: red;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Writing Feedback Tool</h2>
+
+    <textarea id="textArea" placeholder="Type here..."></textarea>
+
+    <div class="progress">
+        <div class="bar" id="bar"></div>
+    </div>
+
+    <p id="chars">Characters: 0</p>
+    <p id="words">Words: 0</p>
+    <p id="msg" class="warning"></p>
+</div>
+
+<script>
+const area = document.getElementById("textArea");
+const chars = document.getElementById("chars");
+const words = document.getElementById("words");
+const msg = document.getElementById("msg");
+const bar = document.getElementById("bar");
+
+const MAX = 200;
+
+area.addEventListener("input", function () {
+
+    let text = area.value;
+
+    // character count
+    let charLength = text.length;
+    chars.innerText = "Characters: " + charLength;
+
+    // word count
+    let wordLength = text.trim() === "" ? 0 :
+        text.trim().split(/\s+/).length;
+    words.innerText = "Words: " + wordLength;
+
+    // warning
+    if (charLength > MAX) {
+        msg.innerText = "Character limit exceeded!";
+        bar.style.background = "red";
+    } else {
+        msg.innerText = "";
+        bar.style.background = "blue";
+    }
+
+    // progress bar
+    let percent = (charLength / MAX) * 100;
+    if (percent > 100) percent = 100;
+    bar.style.width = percent + "%";
+});
+</script>
+
+</body>
+</html>

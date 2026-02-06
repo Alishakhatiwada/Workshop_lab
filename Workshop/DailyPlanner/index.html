@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing Feedback</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+    margin: 0;
+    padding: 30px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: gray;
+    margin-bottom: 25px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+select, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.word-info {
+    font-size: 12px;
+    color: gray;
+    text-align: right;
+    margin-top: 3px;
+}
+
+.buttons {
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    background: #4a90e2;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="buttons">
+        <button onclick="clearInputs()">Clear Inputs</button>
+    </div>
+
+    <h1>Writing Feedback</h1>
+    <p class="subtitle">
+        Generate feedback on student writing based on custom criteria or rubric.
+    </p>
+
+    <label>Grade level:</label>
+    <select>
+        <option>1st Grade</option>
+        <option>2nd Grade</option>
+        <option>3rd Grade</option>
+        <option>High School</option>
+    </select>
+
+    <label>Describe the assignment:</label>
+    <textarea id="assignment"></textarea>
+    <div class="word-info" id="count1">0 words</div>
+
+    <label>Type of Feedback or Rubric:</label>
+    <textarea id="rubric"></textarea>
+    <div class="word-info" id="count2">0 words</div>
+
+    <label>Additional instructions:</label>
+    <textarea id="instructions"></textarea>
+    <div class="word-info" id="count3">0 words</div>
+
+</div>
+
+<script>
+function countWords(text) {
+    return text.trim() === "" ? 0 :
+        text.trim().split(/\s+/).length;
+}
+
+function updateCount(id, output) {
+    document.getElementById(id).addEventListener("input", function () {
+        let words = countWords(this.value);
+        document.getElementById(output).innerText = words + " words";
+    });
+}
+
+updateCount("assignment", "count1");
+updateCount("rubric", "count2");
+updateCount("instructions", "count3");
+
+function clearInputs() {
+    document.querySelectorAll("textarea").forEach(t => t.value = "");
+    document.querySelectorAll(".word-info")
+        .forEach(c => c.innerText = "0 words");
+}
+</script>
+
+</body>
+</html>

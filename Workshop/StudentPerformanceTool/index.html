@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Performance Tool</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+    padding: 40px;
+}
+
+.container {
+    width: 400px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 15px;
+    padding: 10px;
+    background: #eee;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Student Performance Tool</h2>
+
+    <input type="text" id="name" placeholder="Student Name">
+
+    <input type="number" id="sub1" placeholder="Math Marks">
+    <input type="number" id="sub2" placeholder="Science Marks">
+    <input type="number" id="sub3" placeholder="English Marks">
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function calculate() {
+    let name = document.getElementById("name").value;
+    let m1 = Number(document.getElementById("sub1").value);
+    let m2 = Number(document.getElementById("sub2").value);
+    let m3 = Number(document.getElementById("sub3").value);
+
+    if (!name) {
+        alert("Enter student name");
+        return;
+    }
+
+    let total = m1 + m2 + m3;
+    let percentage = total / 3;
+
+    let grade = "";
+    if (percentage >= 90) grade = "A";
+    else if (percentage >= 80) grade = "B";
+    else if (percentage >= 70) grade = "C";
+    else if (percentage >= 60) grade = "D";
+    else grade = "F";
+
+    document.getElementById("result").innerHTML =
+        "Name: " + name + "<br>" +
+        "Total Marks: " + total + "<br>" +
+        "Percentage: " + percentage.toFixed(2) + "%<br>" +
+        "Grade: " + grade;
+}
+</script>
+
+</body>
+</html>
